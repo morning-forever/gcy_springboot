@@ -4,8 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.WebApplicationInitializer;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableSwagger2
 public class GcySpringbootApplication  extends SpringBootServletInitializer implements WebApplicationInitializer {
 
 	public static void main(String[] args) {
@@ -13,9 +15,9 @@ public class GcySpringbootApplication  extends SpringBootServletInitializer impl
 	}
 
 /*	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(GcySpringbootApplication.class);
-	}*/
+protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+	return builder.sources(GcySpringbootApplication.class);
+}*/
 
 
 
@@ -23,7 +25,7 @@ public class GcySpringbootApplication  extends SpringBootServletInitializer impl
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
 
-			System.out.println("Let's inspect the beans provided by Spring Boot:");
+			System.out.println("Let's inspect th23e beans provided by Spring Boot:");
 
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
