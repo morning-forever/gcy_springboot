@@ -1,14 +1,28 @@
 package com.gcy.config;
 
+import com.gcy.service.MyUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+
 @Configuration
 @EnableWebSecurity
+@Component
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
+
+    private MyUserDetailService userDetailService;
+
+    @Autowired
+    public SpringSecurityConfig(MyUserDetailService userDetailService) {
+        this.userDetailService = userDetailService;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -26,16 +40,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 
-        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+        /*auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
                 .withUser("admin")
                 .password(new BCryptPasswordEncoder().encode("123456"))
                 .roles();
         auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
                 .withUser("user")
                 .password(new BCryptPasswordEncoder().encode("123456"))
-                .roles();
+                .roles();*/
 
-
-    }
+        auth.userDetailsService(userDetailService).passwordEncoder(new BCryptPasswordEncoder());
+}
 }
 

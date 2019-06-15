@@ -13,7 +13,7 @@ public class HelloController {
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("name","1234");
-       mv.setViewName("index");
+        mv.setViewName("index");
         return mv;
     }
 
